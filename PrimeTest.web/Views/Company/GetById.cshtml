@@ -1,0 +1,76 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model PrimeTechTest.DTOs.CompanyDto
+
+
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>Id</th>
+			<th>CompanyUniqueId</th>
+			<th>Name</th>
+			<th>Address</th>
+			<th>Edit</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>@Model.Id</td>
+			<td>@Model.CompanyUniqueId</td>
+			<td>@Model.Name</td>
+			<td>@Model.Address</td>
+			<td>
+				<a class="btn btn-primary" a asp-controller="Company" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<table class="table">
+	<thead>
+		<tr>
+			@foreach (var columnName in Model.ColumnMetaDatas)
+			{
+				<th>@columnName.ColumnInfo</th>
+			}
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+		@foreach (var row in Model.ColumnValues)
+		{
+			
+				@foreach (var value in row.Value.Split(','))
+				{
+					<td>@value</td>
+				}
+			
+		}
+		</tr>
+	</tbody>
+</table>
+
+<br/> <br />
+<table class="table">
+	<thead>
+		<tr>			
+			<th>AddMetaData</th>
+			<th>AddValue</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>			
+			<td>
+				<a class="btn btn-primary" a asp-controller="Company" asp-action="AddMetaData" asp-route-id="@Model.CompanyUniqueId">AddMetaData</a>
+			</td>
+			<td>
+				<a class="btn btn-primary" a asp-controller="Company" asp-action="AddValue" asp-route-id="@Model.CompanyUniqueId">AddValue</a>
+			</td>
+		</tr>
+	</tbody>
+</table>
